@@ -1,8 +1,11 @@
 package main
-import (
 
+import (
+	"./core/app"
 )
 
 func main() {
-	AllRoutes()
+	InitializeControllers()
+	InitializeRoutes()
+	app.Main()
 }
