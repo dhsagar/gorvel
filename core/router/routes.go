@@ -1,11 +1,9 @@
 package router
 
 import (
-	"fmt"
-	"./../function"
+	"./../app"
 )
 
 func Get(urlPattern string, handler string) {
-	fmt.Println(urlPattern, handler)
-	functions.Invoke(handler)
+	app.AddRouteContext(urlPattern, handler)
 }

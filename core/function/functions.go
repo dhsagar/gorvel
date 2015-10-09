@@ -1,18 +1,27 @@
 package functions
 
-import "reflect"
+import (
+	"reflect"
+	"fmt"
+	"github.com/Unknwon/macaron"
+)
 
 var funcs = make(map[string]interface{})
 
-func Register(name string, function func()) {
+func Register(name string, function func(*macaron.Context)) {
 	registerFunction(name, function)
 }
 
-func registerFunction(name string, function func()) {
+func registerFunction(name string, function func(*macaron.Context)) {
 	if funcs[name] != nil {
-		panic("functions name already exixts")
+		fmt.Println("Function name already exists...")
+		return
 	}
 	funcs[name] = function
+}
+
+func GetControllerFunctions(name string) (interface{}) {
+	return funcs[name]
 }
 
 func Invoke(name string, params ... interface{}) (result []reflect.Value, err error) {

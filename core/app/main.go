@@ -1,17 +1,31 @@
 package app
-import "github.com/Unknwon/macaron"
+import (
+	"github.com/Unknwon/macaron"
+	"./../function"
+	_ "./../../controller"
+)
+
+var m *macaron.Macaron
 
 func Main() {
-	m := macaron.Classic()
+	m.Run(8080)
+}
+
+
+func InitWebContext() {
+	m = macaron.Classic()
 	rendererOptions := macaron.RenderOptions{
 		// Directory to load templates. Default is "templates".
-		Directory: "./../../view",
-		// Extensions to parse template files from. Defaults are [".tmpl", ".html"].
-		Extensions: []string{".tmpl", ".html"},
+		Directory: "view",
 		Delims: macaron.Delims{"{{", "}}"},
 	}
 	m.Use(macaron.Renderer(rendererOptions))
-	m.Use(macaron.Static("./../resource"))
-	AddAllRoutes(m)
-	m.Run(8080)
+	m.Use(macaron.Static("resource"))
+	m.NotFound()
+}
+
+
+func AddRouteContext(pattern string, handler string) {
+	controller := functions.GetControllerFunctions(handler)
+	m.Get(pattern, controller)
 }

@@ -1,12 +1,15 @@
 package controller
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/Unknwon/macaron"
+	"./../core/view"
+)
 
-func Hello() {
+func Hello(ctx *macaron.Context) {
+	fmt.Println(ctx.Req.Host)
 	fmt.Println("Printed Hello")
-}
-
-func HelloTwo(a int) {
-	fmt.Println("Printed Hello  ", a)
+	view.Data(ctx, "DataName", 5)
+	view.Show(ctx, "index")
 }
 
