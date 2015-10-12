@@ -4,9 +4,18 @@ import (
 	"./core/app"
 )
 
+/*
+	|--------------------------------------------------------------------------|
+	| Main -- Application Starts                                               |
+	|--------------------------------------------------------------------------|
+	|                                                                          |
+	| Main Application Starts from Here. There is no need to Change            |
+	| Modify this File.                                                        |
+	|--------------------------------------------------------------------------|
+*/
 func main() {
 	InitializeControllers()
 	app.InitWebContext()
 	InitializeRoutes()
-	app.Main()
+	app.Run()
 }

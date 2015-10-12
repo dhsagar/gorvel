@@ -3,45 +3,47 @@ import (
 	"github.com/Unknwon/macaron"
 	"./../function"
 	_ "./../../controller"
-	"fmt"
 )
 
 var m *macaron.Macaron
 
-func Main() {
+func Run() {
 	m.Run(8080)
 }
-
 
 func InitWebContext() {
 	m = macaron.Classic()
 	rendererOptions := macaron.RenderOptions{
-		// Directory to load templates. Default is "templates".
-		Directory: "view",
+		Directory: "views",
 		Delims: macaron.Delims{"{{", "}}"},
 	}
 	m.Use(macaron.Renderer(rendererOptions))
-	m.Use(macaron.Static("resource"))
+	m.Use(macaron.Static("resources"))
 	m.NotFound(routerNotFoundHandler)
-	m.Action(errorHandler)
+	m.InternalServerError(serverErrorHandler)
+	m.Action(errorsHandler)
 }
 
-
-func AddRouteContext(pattern string, handler string) {
+func AddRouteContext(method string, pattern string, handler string) {
 	controller := functions.GetControllerFunctions(handler)
-	m.Get(pattern, controller)
+	cHandler := make([]macaron.Handler, 1)
+	cHandler[0] = controller
+	m.Handle(method, pattern, cHandler)
 }
 
 func routerNotFoundHandler(ctx *macaron.Context) {
 	ctx.HTML(404, "404")
 }
 
-func errorHandler(ctx *macaron.Context) {
-	status := ctx.Resp.Status()
-	if  status == 400 {
+func serverErrorHandler(ctx *macaron.Context) {
+	ctx.HTML(500, "500")
+}
 
-	} else if status == 503 {
-		fmt.Println("After Request Not Found")
-		ctx.HTML(503, "503")
+func errorsHandler(ctx *macaron.Context) {
+	status := ctx.Resp.Status()
+	if status == 404 {
+		ctx.HTML(404, "404")
+	} else if status >= 400 {
+		ctx.HTML(500, "500")
 	}
 }

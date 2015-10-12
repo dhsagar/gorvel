@@ -1,15 +1,16 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/Unknwon/macaron"
-	"./../core/view"
+	"./../core/response"
 )
 
 func Hello(ctx *macaron.Context) {
-	fmt.Println(ctx.Req.Host)
-	fmt.Println("Printed Hello")
-	view.Data(ctx, "DataName", 5)
-	view.Show(ctx, "index")
-}
+	type JSONTest struct {
+		Name string
+		Value int
+	}
 
+	newJSON := JSONTest{"Sadlil", 5}
+	response.Json(ctx, newJSON)
+}

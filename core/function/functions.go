@@ -14,7 +14,7 @@ func Register(name string, function func(*macaron.Context)) {
 
 func registerFunction(name string, function func(*macaron.Context)) {
 	if funcs[name] != nil {
-		fmt.Println("Function name already exists...")
+		fmt.Println("Function name " + name + " already exists...")
 		return
 	}
 	funcs[name] = function
