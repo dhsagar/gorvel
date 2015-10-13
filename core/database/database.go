@@ -15,7 +15,7 @@ func GetDB() gorm.DB {
 	if db != nil {
 		return *db
 	}
-	dbInstance, err := gorm.Open("mysql", "root:123@/dbname")
+	dbInstance, err := gorm.Open("mysql", "root:123@localhost:3306/dbname")
 	dbInstance.LogMode(false)
 	if(err != nil) {
 		fmt.Println("[ERROR] Database Connection Failed")
