@@ -2,6 +2,7 @@ package main
 
 import (
 	"./core/app"
+	"./core/config"
 )
 
 /*
@@ -14,6 +15,7 @@ import (
 	|--------------------------------------------------------------------------|
 */
 func main() {
+	config.ReadAllConfig()
 	InitializeControllers()
 	app.InitWebContext()
 	InitializeRoutes()
