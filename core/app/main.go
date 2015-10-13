@@ -1,6 +1,6 @@
 package app
 import (
-	"github.com/Unknwon/macaron"
+	"gopkg.in/macaron.v1"
 	"./../function"
 	_ "./../../controller"
 )

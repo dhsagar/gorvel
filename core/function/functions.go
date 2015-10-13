@@ -3,7 +3,7 @@ package functions
 import (
 	"reflect"
 	"fmt"
-	"github.com/Unknwon/macaron"
+	"gopkg.in/macaron.v1"
 )
 
 var funcs = make(map[string]interface{})

@@ -1,6 +1,6 @@
 package response
 
-import "github.com/Unknwon/macaron"
+import "gopkg.in/macaron.v1"
 
 func Show(ctx *macaron.Context, templateName string, status ...int) {
 	var s int

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/Unknwon/macaron"
+	"gopkg.in/macaron.v1"
 	"./../core/response"
 )
 
